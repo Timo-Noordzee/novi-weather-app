@@ -1,23 +1,39 @@
+import AuthenticatedRoute
+    from "components/AuhenticatedRoute/AuthenticatedRoute";
+import {AuthContext} from "context/AuthContext";
+import LoginPage from "pages/login/LoginPage";
+import {useContext} from "react";
+import {Route, Routes} from "react-router-dom";
 import "./App.css";
-import logo from "assets/logo.svg";
+
+const EmptyPage = ({title}) => {
+
+    const {signOut} = useContext(AuthContext)
+
+    const onClickSignOut = async () => {
+        await signOut()
+    }
+
+    return <div>
+        <h1>{title}</h1>
+        <button onClick={onClickSignOut}>Uitloggen</button>
+    </div>
+};
 
 function App () {
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
+        <div className="app" data-theme={"light"}>
+            <Routes>
+                <Route path="/" element={
+                    <AuthenticatedRoute>
+                        <EmptyPage title={"Home"} />
+                    </AuthenticatedRoute>
+                } />
+                <Route path={"/login"} element={<LoginPage />} />
+                <Route path={"/settings"} element={<AuthenticatedRoute>
+                    <EmptyPage title={"Intellingen"}/>
+                </AuthenticatedRoute>}/>
+            </Routes>
         </div>
     );
 }

@@ -1,0 +1,22 @@
+.button {
+  border: none;
+  border-radius: 0.5rem;
+  box-sizing: border-box;
+  font-weight: 700;
+  padding: 1rem;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.button-primary {
+  background-color: var(--primary-color);
+  color: var(--text-on-primary-color);
+}
+
+.button-secondary {
+  background-color: var(--card-background-color);
+  color: var(--text-color);
+}
