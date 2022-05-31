@@ -1,5 +1,6 @@
 import {AuthContextProvider} from "context/AuthContext";
 import {LocationContextProvider} from "context/LocationContext";
+import {WeatherContextProvider} from "context/WeatherContext";
 import "index.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -11,9 +12,11 @@ root.render(
     <React.StrictMode>
         <AuthContextProvider>
             <LocationContextProvider>
-                <BrowserRouter>
-                    <App />
-                </BrowserRouter>
+                <WeatherContextProvider>
+                    <BrowserRouter>
+                        <App />
+                    </BrowserRouter>
+                </WeatherContextProvider>
             </LocationContextProvider>
         </AuthContextProvider>
     </React.StrictMode>
