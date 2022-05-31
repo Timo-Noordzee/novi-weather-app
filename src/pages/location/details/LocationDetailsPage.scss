@@ -46,15 +46,28 @@
     box-sizing: border-box;
   }
 
-  .content {
+  .body {
     grid-area: content-start / sidenav-start / content-end / content-end;
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 0.5rem;
+    column-gap: 0.5rem;
+    padding: 0.5rem;
+    overflow-y: auto;
+
+    .current-weather {
+      display: flex;
+      flex-direction: column;
+      row-gap: 0.5rem;
+    }
   }
 }
 
 @media screen and (min-width: 1250px) {
   .location-details-page {
-    .content {
+    .body {
       grid-area: content;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
 
     .sidenav-wrapper {

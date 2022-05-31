@@ -1,7 +1,12 @@
+import Card from "components/common/Card/Card";
 import IconButton from "components/common/IconButton/IconButton";
 import LoadingIndicator
     from "components/util/LoadingIndicator/LoadingIndicator";
 import Sidenav from "components/util/Sidenav/Sidenav";
+import CurrentWeatherCard
+    from "components/weather/CurrentWeatherCard/CurrentWeatherCard";
+import HourlyForecastCard
+    from "components/weather/HourlyForecastCard/HourlyForecastCard";
 import dayjs from "dayjs";
 import {getWeatherIconPath} from "helper/weather-helper";
 import useLocationWithWeather from "hooks/use-location-with-weather";
@@ -56,8 +61,16 @@ const LocationDetailsPage = () => {
             <div className="sidenav-wrapper" data-opened={sidenavOpened}>
                 <Sidenav opened={sidenavOpened} onSelectLocation={toggleSidenav} />
             </div>
-            <div className="content">
+            <div className="body">
+                <div className="current-weather">
+                    <CurrentWeatherCard weather={location.weather}/>
+                    <HourlyForecastCard forecasts={location.weather.hourly}/>
+                </div>
+                <div className="daily-forecasts-card">
+                    <Card title={"Voorspelling per dag"}>
 
+                    </Card>
+                </div>
             </div>
         </div>
     );

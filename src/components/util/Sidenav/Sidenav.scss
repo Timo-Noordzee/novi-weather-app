@@ -10,6 +10,9 @@
   transform: translateX(-100%);
   transition: all 0.5s ease-in-out;
   transition-property: transform, box-shadow;
+  background-color: var(--background-color);
+  position: relative;
+  z-index: 1;
 
   &[data-opened="true"] {
     box-shadow: 3px 3px 10px 3px #AAA;

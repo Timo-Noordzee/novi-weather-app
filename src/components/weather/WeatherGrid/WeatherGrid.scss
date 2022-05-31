@@ -1,0 +1,23 @@
+.weather-grid {
+  column-gap: 0.25rem;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 1.5rem;
+  padding: 1rem;
+
+  .weather-grid-item {
+    display: flex;
+    flex-direction: column;
+    text-align: start;
+
+    .title {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.8;
+    }
+
+    .value {
+      margin: 0;
+    }
+  }
+}

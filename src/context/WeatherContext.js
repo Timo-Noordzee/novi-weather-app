@@ -61,7 +61,10 @@ export const WeatherContextProvider = props => {
     useInterval(fetchWeatherData, 1000 * 60 * 60)
 
     const contextValue = useMemo(() => ({
-        locationsWithWeather
+        locationsWithWeather,
+        displayTemperature: (kelvin) => {
+            return `${kelvin}°K`
+        }
     }), [locationsWithWeather]);
 
     return <WeatherContext.Provider value={contextValue} {...props} />;

@@ -1,0 +1,60 @@
+.daytime-indicator-wrapper {
+  width: 100%;
+  max-width: 500px;
+  padding: 1rem;
+
+  .countdown-wrapper {
+    bottom: 1rem;
+    left: 50%;
+    margin: 0;
+    position: absolute;
+    text-align: center;
+    transform: translate(-50%, 0);
+
+    .countdown {
+      font-size: clamp(1em, -0.475em + 8.333vw, 2em);
+      margin: 0;
+    }
+
+    .description {
+      white-space: nowrap;
+      font-size: clamp(0.6em, -0.875rem + 8.333vw, 1em);
+    }
+  }
+
+  .sunrise, .sunset {
+    align-items: center;
+    column-gap: 1rem;
+    display: flex;
+    flex-direction: row;
+
+    p {
+      font-size: 1.2rem;
+      margin: 0;
+    }
+
+    svg {
+      height: 3rem;
+      width: 3rem;
+    }
+  }
+}
+
+.daytime-animation-wrapper {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.suntime-indicator {
+  border-bottom: 5px solid #FFFFFF;
+  display: flex;
+  padding: 0 1.5rem;
+}
+
+.time-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
