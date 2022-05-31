@@ -1,6 +1,6 @@
 import {ReactComponent as Logo} from "assets/logo.svg";
-import Button from "components/Button/Button";
-import Input from "components/Input/Input";
+import Button from "components/common/Button/Button";
+import Input from "components/common/Input/Input";
 import {AuthContext} from "context/AuthContext";
 import "pages/login/LoginPage.scss";
 import {useContext, useEffect, useState} from "react";

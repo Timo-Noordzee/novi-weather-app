@@ -1,4 +1,4 @@
-import "components/LoadingIndicator/LoadingIndicator.scss";
+import "components/util/LoadingIndicator/LoadingIndicator.scss";
 
 const LoadingIndicator = () => {
     return <div className="lds-roller">
