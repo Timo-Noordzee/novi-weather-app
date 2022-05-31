@@ -1,3 +1,4 @@
+import {getWeatherIconPath} from "helper/weather-helper";
 import useLocationWithWeather from "hooks/use-location-with-weather";
 import {useEffect} from "react";
 import {useParams} from "react-router-dom";
@@ -5,14 +6,24 @@ import {useParams} from "react-router-dom";
 const LocationDetailsPage = () => {
 
     const {id} = useParams();
-    const location = useLocationWithWeather(id)
+    const location = useLocationWithWeather(id);
 
     useEffect(() => {
-        document.title = location?.city
-    }, [location])
+        if (location) {
+            const iconId = location.weather.current.weather[0].icon;
+            document.getElementById("favicon").href = getWeatherIconPath(iconId);
+            document.title = location.city;
+        }
+
+        return () => {
+            document.getElementById("favicon").href = "/assets/logo.svg";
+        };
+    }, [location]);
 
     return (
-        <div>{id}</div>
+        <div>
+            <p>{id}</p>
+        </div>
     );
 };
 
