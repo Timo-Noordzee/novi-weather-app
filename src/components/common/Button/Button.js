@@ -1,4 +1,4 @@
-import "components/Button/Button.scss";
+import "components/common/Button/Button.scss";
 
 const Button = ({
     children,

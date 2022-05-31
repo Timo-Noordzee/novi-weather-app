@@ -1,6 +1,7 @@
 import {ReactComponent as ErrorIcon} from "assets/error.svg";
-import "components/AuhenticatedRoute/AuthenticatedRoute.scss";
-import LoadingIndicator from "components/LoadingIndicator/LoadingIndicator";
+import "components/util/AuhenticatedRoute/AuthenticatedRoute.scss";
+import LoadingIndicator
+    from "components/util/LoadingIndicator/LoadingIndicator";
 import {AuthContext} from "context/AuthContext";
 import {useContext} from "react";
 import {Navigate, useLocation} from "react-router-dom";
@@ -28,7 +29,7 @@ const AuthenticatedRoute = ({children}) => {
         return <Navigate to={"/login"} state={{from: location}} replace />;
     }
 
-    return children;
+    return children
 };
 
 export default AuthenticatedRoute;

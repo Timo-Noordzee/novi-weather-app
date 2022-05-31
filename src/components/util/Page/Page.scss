@@ -1,0 +1,12 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  .content {
+    box-sizing: border-box;
+    flex: 1;
+    overflow-y: auto;
+    padding: 1rem;
+  }
+}

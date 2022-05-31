@@ -1,0 +1,28 @@
+.location-card {
+  align-items: center;
+  background-color: var(--card-background-color);
+  border-radius: 0.5rem;
+  column-gap: 1rem;
+  display: flex;
+  flex-direction: row;
+  padding: 1rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  .location {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    text-align: start;
+
+    .city {
+      margin: 0;
+    }
+
+    .province {
+      opacity: 0.7;
+    }
+  }
+}

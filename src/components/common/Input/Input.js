@@ -1,4 +1,4 @@
-import "components/Input/Input.scss";
+import "components/common/Input/Input.scss";
 
 const Input = ({
     register,
