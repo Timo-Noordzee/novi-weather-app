@@ -1,0 +1,24 @@
+.select-input {
+  appearance: none;
+  background: url(../../../assets/icons/expand_more_black.svg) no-repeat right 1rem center var(--card-background-color);
+  border: none;
+  border-radius: 0.5rem;
+  color: var(--text-color);
+  font-size: 1.1rem;
+  padding: 1rem;
+  width: 100%;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  option {
+    padding: 0.5rem;
+  }
+}
+
+[data-theme="dark"] {
+  .select-input {
+    background: url(../../../assets/icons/expand_more_white.svg) no-repeat right 1rem center var(--card-background-color);
+  }
+}

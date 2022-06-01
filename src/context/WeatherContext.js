@@ -1,6 +1,8 @@
 import axios from "axios";
 import {buildWebStorage, setupCache} from "axios-cache-interceptor";
 import {AuthContext} from "context/AuthContext";
+import {getIdToken} from "firebase/auth";
+import {kelvinToCelsius, kelvinToFarenheit} from "helper/temperature-helper";
 import useInterval from "hooks/use-interval";
 import useLocations from "hooks/use-locations";
 import {
@@ -11,7 +13,6 @@ import {
     useMemo,
     useState
 } from "react";
-import {getIdToken} from "firebase/auth"
 
 const localAxiosStorage = buildWebStorage(localStorage, "axios");
 const cachedAxios = setupCache(axios, {storage: localAxiosStorage});
@@ -20,16 +21,16 @@ export const WeatherContext = createContext({});
 
 export const WeatherContextProvider = props => {
 
-    const {user} = useContext(AuthContext)
+    const {user, preferences} = useContext(AuthContext);
     const locations = useLocations();
     const [locationsWithWeather, setLocationsWithWeather] = useState({});
 
     const fetchWeatherData = useCallback(async () => {
-        if(!user){
-            return {}
+        if (!user) {
+            return {};
         }
 
-        const idToken = await getIdToken(user)
+        const idToken = await getIdToken(user);
         const response = await Promise.all(locations.map(async location => {
             const {latitude, longitude} = location.coordinates;
             const response = await cachedAxios.get(`https://europe-west1-novi-weather.cloudfunctions.net/api/weather?latitude=${latitude}&longitude=${longitude}&lang=nl`, {
@@ -52,20 +53,37 @@ export const WeatherContextProvider = props => {
             return obj;
         }, {});
         setLocationsWithWeather(mappedById);
-    }, [user, locations]);
+    }, [
+        user,
+        locations
+    ]);
+
+    const displayTemperature = useCallback((kelvin) => {
+        if (preferences.metric === "celcius") {
+            const temperature = kelvinToCelsius(kelvin);
+            return `${Math.round(temperature)}°C`;
+        } else if (preferences.metric === "farenheit") {
+            const temperature = kelvinToFarenheit(kelvin);
+            return `${Math.round(temperature)}°F`;
+        } else {
+            return `${Math.round(kelvin)}°K`;
+        }
+
+    }, [preferences]);
 
     useEffect(() => {
         fetchWeatherData().catch(console.error);
     }, [fetchWeatherData]);
 
-    useInterval(fetchWeatherData, 1000 * 60 * 60)
+    useInterval(fetchWeatherData, 1000 * 60 * 60);
 
     const contextValue = useMemo(() => ({
         locationsWithWeather,
-        displayTemperature: (kelvin) => {
-            return `${kelvin}°K`
-        }
-    }), [locationsWithWeather]);
+        displayTemperature
+    }), [
+        locationsWithWeather,
+        displayTemperature
+    ]);
 
     return <WeatherContext.Provider value={contextValue} {...props} />;
 };
