@@ -32,6 +32,10 @@
         font-size: clamp(1em, -0.875rem + 8.333vw, 2em);
       }
 
+      .time {
+        font-size: clamp(1em, -0.875rem + 8.333vw, 1.5em);;
+      }
+
       * {
         margin: 0;
       }

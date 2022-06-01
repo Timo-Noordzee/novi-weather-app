@@ -1,10 +1,11 @@
-import Card from "components/common/Card/Card";
 import IconButton from "components/common/IconButton/IconButton";
 import LoadingIndicator
     from "components/util/LoadingIndicator/LoadingIndicator";
 import Sidenav from "components/util/Sidenav/Sidenav";
 import CurrentWeatherCard
     from "components/weather/CurrentWeatherCard/CurrentWeatherCard";
+import DailyForecastCard
+    from "components/weather/DailyForecastCard/DailyForecastCard";
 import HourlyForecastCard
     from "components/weather/HourlyForecastCard/HourlyForecastCard";
 import dayjs from "dayjs";
@@ -33,6 +34,7 @@ const LocationDetailsPage = () => {
 
         return () => {
             document.getElementById("favicon").href = "/assets/logo.svg";
+            document.title = "Weerkompas"
         };
     }, [location]);
 
@@ -63,13 +65,11 @@ const LocationDetailsPage = () => {
             </div>
             <div className="body">
                 <div className="current-weather">
-                    <CurrentWeatherCard weather={location.weather}/>
-                    <HourlyForecastCard forecasts={location.weather.hourly}/>
+                    <CurrentWeatherCard weather={location.weather} />
+                    <HourlyForecastCard forecasts={location.weather.hourly} />
                 </div>
                 <div className="daily-forecasts-card">
-                    <Card title={"Voorspelling per dag"}>
-
-                    </Card>
+                    <DailyForecastCard forecasts={location.weather.daily} />
                 </div>
             </div>
         </div>

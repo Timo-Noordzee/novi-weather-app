@@ -34,11 +34,11 @@ const WeatherGrid = ({weather}) => {
             <WeatherGridItem title={"Neerslag"}>
                 <p className={"value"}>{Math.round(pop * 100)}%</p>
             </WeatherGridItem>
-            <WeatherGridItem title={"Luchtvochtigheid"}>
-                <p className={"value"}>{humidity}%</p>
-            </WeatherGridItem>
             <WeatherGridItem title={"Luchtdruk"}>
                 <p className={"value"}>{pressure} hPa</p>
+            </WeatherGridItem>
+            <WeatherGridItem title={"Luchtvochtigheid"}>
+                <p className={"value"}>{humidity}%</p>
             </WeatherGridItem>
             <WeatherGridItem title={"Dauwpunt"}>
                 <p className={"value"}>{displayTemperature(dewPoint)}</p>

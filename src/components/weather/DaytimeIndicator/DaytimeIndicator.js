@@ -77,13 +77,11 @@ const DaytimeIndicator = ({sunset, sunrise}) => {
     return (
         <div className="daytime-indicator-wrapper">
             <div className={"daytime-animation-wrapper"}>
-                <svg className="suntime-indicator" style={{overflow: "visible"}}
-                     width="75%"
+                <svg className="daytime-animation"
                      viewBox="-1 -1 2 1">
 
                     <path d={backgroundArc} fill="#FFFFFF" />
                     <path d={filledArc} fill="#E4B612" />
-
                     <svg x={markerLocation[0] - 0.2} y={markerLocation[1] - 0.2} height="0.4" viewBox="0 0 480 480" width="0.4" xmlns="http://www.w3.org/2000/svg">
                         <g fill="#FDD020">
                             <path d="m376 240c0 75.109375-60.890625 136-136 136s-136-60.890625-136-136 60.890625-136 136-136 136 60.890625 136 136zm0 0" />
@@ -106,7 +104,7 @@ const DaytimeIndicator = ({sunset, sunrise}) => {
                     remainingSeconds > 0 &&
                     <div className={"countdown-wrapper"}>
                         <p className={"countdown"}>{new Date(remainingSeconds * 1000).toISOString()
-                            .substr(11, 8)}</p>
+                            .substring(11, 19)}</p>
                         <small className={"description"}>Tot zonsondergang</small>
                     </div>
                 }
@@ -114,7 +112,7 @@ const DaytimeIndicator = ({sunset, sunrise}) => {
                     remainingSeconds < 0 &&
                     <div className={"countdown-wrapper"}>
                         <p className={"countdown"}>{new Date(-remainingSeconds * 1000).toISOString()
-                            .substr(11, 8)}</p>
+                            .substring(11, 19)}</p>
                         <small className={"description"}>Na zonsondergang</small>
                     </div>
                 }
