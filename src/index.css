@@ -7,6 +7,8 @@
     --text-color: #040404;
     --text-on-primary-color: #FFFFFF;
     --color-red: #F35F59;
+    --color-orange: #FAB15C;
+    --color-green: #00B38D;
 }
 
 [data-theme="dark"] {

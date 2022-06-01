@@ -72,7 +72,7 @@ const SettingsPage = () => {
                     <Select register={register("sunPower")} options={sunPowerOptions} />
                 </FormField>
                 <FormField title={"Voorkeurs windschaal"}>
-                    <Select register={register("windPower")} options={windScaleOptions} />
+                    <Select register={register("windScale")} options={windScaleOptions} />
                 </FormField>
                 <FormField title={"Voorkeurs kans op neerslag"}>
                     <Input register={register("pop")} type={"number"} min={0} max={100} step={1} placeholder={"Kans op neerslag (%)"} />
