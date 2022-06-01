@@ -1,0 +1,44 @@
+.accordion {
+
+  .accordion-summary {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .accordion-summary-content {
+      flex: 1;
+    }
+
+    .accordion-expand-icon-wrapper {
+      display: flex;
+      transform: rotate(0deg);
+      transition: transform 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+    }
+
+    .expanded {
+      transform: rotate(180deg);
+    }
+
+    .icon-button {
+      fill: var(--text-color);
+      transform: rotate(0deg);
+      transition: transform 0.3s;
+
+      &.opened {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  .accordion-details {
+    overflow: hidden;
+    transition: height 0.3s ease-in-out;
+
+    * {
+      margin: 0;
+    }
+  }
+}

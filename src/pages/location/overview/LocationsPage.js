@@ -2,29 +2,29 @@ import Button from "components/common/Button/Button";
 import LocationCard from "components/location/LocationCard";
 import Page from "components/util/Page/Page";
 import {LocationContext} from "context/LocationContext";
-import useLocations from "hooks/use-locations";
+import useLocationsWithWeather from "hooks/use-locations-with-weather";
 import "pages/location/overview/LocationsPage.scss";
 import {useContext} from "react";
 import {useNavigate} from "react-router-dom";
 
 const LocationsPage = () => {
 
-    const navigate = useNavigate()
-    const locations = useLocations();
-    const {removeLocation} = useContext(LocationContext)
+    const navigate = useNavigate();
+    const locations = useLocationsWithWeather();
+    const {removeLocation} = useContext(LocationContext);
 
     const onClickLocation = id => {
-        navigate(`/location/${id}`)
-    }
+        navigate(`/location/${id}`);
+    };
 
     const onClickDeleteLocation = id => {
         const call = async () => {
-            await removeLocation(id)
-        }
-        call().catch(console.error)
+            await removeLocation(id);
+        };
+        call().catch(console.error);
     };
 
-    const onClickAddLocation = () => navigate("/location/add")
+    const onClickAddLocation = () => navigate("/location/add");
 
     return (
         <Page title={"Mijn locaties"} showBackButton={false}>
@@ -35,6 +35,7 @@ const LocationsPage = () => {
                 {locations.map(location => <LocationCard
                     key={location.id}
                     city={location.city}
+                    weather={location.weather.current}
                     province={location.province}
                     onClick={() => onClickLocation(location.id)}
                     onClickDelete={() => onClickDeleteLocation(location.id)}

@@ -29,16 +29,20 @@ function App () {
             <Routes>
                 <Route path="/" element={
                     <AuthenticatedRoute>
-                        <LocationsPage/>
+                        <LocationsPage />
                     </AuthenticatedRoute>
                 } />
                 <Route path={"/login"} element={<LoginPage />} />
                 <Route path={"/location/*"} element={<AuthenticatedRoute>
                     <Routes>
                         <Route index element={<LocationsPage />} />
-                        <Route exact path={"add"} element={<AddLocationPage />} />
+                        <Route exact path={"add"} element={
+                            <AddLocationPage />} />
                         <Route path={":id"} element={<LocationDetailsPage />} />
                     </Routes>
+                </AuthenticatedRoute>} />
+                <Route path={"/locations"} element={<AuthenticatedRoute>
+                    <LocationsPage />
                 </AuthenticatedRoute>} />
                 <Route path={"/settings"} element={<AuthenticatedRoute>
                     <EmptyPage title={"Intellingen"} />
