@@ -1,18 +1,12 @@
 import "components/common/Accordion/Accordion.scss";
 import AccordionSummary from "components/common/Accordion/AccordionSummary";
-import {
-    Children,
-    cloneElement,
-    useEffect,
-    useRef,
-    useState
-} from "react";
+import {Children, cloneElement, useEffect, useRef, useState} from "react";
 
-const Accordion = ({children}) => {
+const Accordion = ({className, children, openedByDefault}) => {
 
     const ref = useRef(null);
 
-    const [opened, setOpened] = useState(false);
+    const [opened, setOpened] = useState(openedByDefault);
     const [height, setHeight] = useState(opened ?
         undefined :
         0);
@@ -44,7 +38,7 @@ const Accordion = ({children}) => {
     const onToggleClicked = () => setOpened(!opened);
 
     return (
-        <div className="accordion" aria-expanded={opened}>
+        <div className={`accordion ${className ?? ""}`} aria-expanded={opened}>
             {Children.map(children, child => {
                 const type = child.props.__TYPE;
                 switch (type) {
@@ -63,6 +57,10 @@ const Accordion = ({children}) => {
             })}
         </div>
     );
+};
+
+Accordion.defaultProps = {
+    openedByDefault: false
 };
 
 export default Accordion;

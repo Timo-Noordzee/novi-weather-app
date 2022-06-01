@@ -17,6 +17,7 @@ const AccordionSummary = props => {
 
 AccordionSummary.propTypes = {
     children: PropTypes.node,
+    className: PropTypes.string,
     __TYPE: PropTypes.string,
     __ON_CLICK: PropTypes.func
 };

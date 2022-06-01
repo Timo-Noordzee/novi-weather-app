@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import {forwardRef, useEffect, useState} from "react";
 
 const AccordionDetails = forwardRef((props, ref) => {
@@ -26,6 +27,10 @@ const AccordionDetails = forwardRef((props, ref) => {
         </div>
     );
 });
+
+AccordionDetails.propTypes = {
+    className: PropTypes.string
+};
 
 AccordionDetails.displayName = "AccordionDetails";
 

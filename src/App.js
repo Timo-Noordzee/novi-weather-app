@@ -5,6 +5,7 @@ import AddLocationPage from "pages/location/add/AddLocationPage";
 import LocationDetailsPage from "pages/location/details/LocationDetailsPage";
 import LocationsPage from "pages/location/overview/LocationsPage";
 import LoginPage from "pages/login/LoginPage";
+import RankingPage from "pages/RankingPage/RankingPage";
 import SettingsPage from "pages/SettingsPage/SettingsPage";
 import {useContext} from "react";
 import {Route, Routes} from "react-router-dom";
@@ -35,6 +36,9 @@ function App () {
                 </AuthenticatedRoute>} />
                 <Route path={"/settings"} element={<AuthenticatedRoute>
                     <SettingsPage />
+                </AuthenticatedRoute>} />
+                <Route path={"/ranking"} element={<AuthenticatedRoute>
+                    <RankingPage />
                 </AuthenticatedRoute>} />
             </Routes>
         </div>
