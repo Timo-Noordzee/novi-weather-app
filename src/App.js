@@ -5,27 +5,16 @@ import AddLocationPage from "pages/location/add/AddLocationPage";
 import LocationDetailsPage from "pages/location/details/LocationDetailsPage";
 import LocationsPage from "pages/location/overview/LocationsPage";
 import LoginPage from "pages/login/LoginPage";
+import SettingsPage from "pages/SettingsPage/SettingsPage";
 import {useContext} from "react";
 import {Route, Routes} from "react-router-dom";
 import "./App.css";
 
-const EmptyPage = ({title}) => {
-
-    const {signOut} = useContext(AuthContext);
-
-    const onClickSignOut = async () => {
-        await signOut();
-    };
-
-    return <div>
-        <h1>{title}</h1>
-        <button onClick={onClickSignOut}>Uitloggen</button>
-    </div>;
-};
-
 function App () {
+    const {preferences} = useContext(AuthContext)
+
     return (
-        <div className="app" data-theme={"light"}>
+        <div className="app" data-theme={preferences.theme}>
             <Routes>
                 <Route path="/" element={
                     <AuthenticatedRoute>
@@ -45,7 +34,7 @@ function App () {
                     <LocationsPage />
                 </AuthenticatedRoute>} />
                 <Route path={"/settings"} element={<AuthenticatedRoute>
-                    <EmptyPage title={"Intellingen"} />
+                    <SettingsPage />
                 </AuthenticatedRoute>} />
             </Routes>
         </div>
