@@ -1,7 +1,14 @@
 import {ReactComponent as Logo} from "assets/logo.svg";
 import Button from "components/common/Button/Button";
 import Input from "components/common/Input/Input";
-import {AuthContext} from "context/AuthContext";
+import {
+    AuthContext,
+    EmailAlreadyInUseError,
+    TooManyRequestError,
+    UserDisabledError,
+    UserNotFoundError,
+    WrongPasswordError
+} from "context/AuthContext";
 import "pages/login/LoginPage.scss";
 import {useContext, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
@@ -35,25 +42,24 @@ const LoginPage = () => {
                 navigate(from, {replace: true});
             }
         } catch (error) {
-            console.error(error);
-            switch (error.code) {
-            case "auth/wrong-password":
+            switch (error.constructor) {
+            case WrongPasswordError:
                 setError("Het ingevulde wachtwoord is onjuist");
                 break;
-            case "auth/user-not-found":
-                setError(`Er bestaat geen account met het e-mailadres ${email}`);
+            case UserNotFoundError:
+                setError(`Er bestaat geen account met het e-mailadres ${error.email}`);
                 break;
-            case "auth/email-already-in-use":
-                setError(`Het e-mailadres ${email} is al in gebruik`);
+            case EmailAlreadyInUseError:
+                setError(`Het e-mailadres ${error.email} is al in gebruik`);
                 break;
-            case "user-disabled":
+            case UserDisabledError:
                 setError("Dit account is uitgeschakeld");
                 break;
-            case "too-many-requests":
+            case TooManyRequestError:
                 setError("Je hebt teveel onjuist inlogpogingen gedaan, inloggen is daarom tijdelijk uitgeschakeld");
                 break;
             default:
-                setError(`Er is een onbekende fout opgetreden, code: ${error.code}`);
+                setError(`Er is een onbekende fout opgetreden, code: ${error.message}`);
                 break;
             }
         }

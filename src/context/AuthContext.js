@@ -27,6 +27,29 @@ const cachedPreferences = () => {
 
 export const AuthContext = createContext({});
 
+export class WrongPasswordError extends Error {
+}
+
+export class UserNotFoundError extends Error {
+    constructor (email, message) {
+        super(message);
+        this.email = email;
+    }
+}
+
+export class EmailAlreadyInUseError extends Error {
+    constructor (email, message) {
+        super(message);
+        this.email = email;
+    }
+}
+
+export class UserDisabledError extends Error {
+}
+
+export class TooManyRequestError extends Error {
+}
+
 export const AuthContextProvider = props => {
     const [user, loading, error] = useAuthState(firebaseAuth);
     const [preferences, setPreferences] = useState(cachedPreferences());
@@ -52,12 +75,38 @@ export const AuthContextProvider = props => {
         }
     }, [user]);
 
-    const signIn = useCallback((email, password) => {
-        return signInWithEmailAndPassword(firebaseAuth, email, password);
+    const signIn = useCallback(async (email, password) => {
+        try {
+            await signInWithEmailAndPassword(firebaseAuth, email, password);
+        } catch (error) {
+            switch (error.code) {
+            case "auth/wrong-password":
+                throw new WrongPasswordError();
+            case "auth/user-not-found":
+                throw new UserNotFoundError(email, error.message);
+            case "user-disabled":
+                throw new UserDisabledError();
+            case "too-many-requests":
+                throw new TooManyRequestError();
+            default:
+                throw error;
+            }
+        }
     }, []);
 
-    const signUp = useCallback((email, password) => {
-        return createUserWithEmailAndPassword(firebaseAuth, email, password);
+    const signUp = useCallback(async (email, password) => {
+        try {
+            await createUserWithEmailAndPassword(firebaseAuth, email, password);
+        } catch (error) {
+            switch (error.code) {
+            case "auth/email-already-in-use":
+                throw new EmailAlreadyInUseError(email, error.message);
+            case "too-many-requests":
+                throw new TooManyRequestError();
+            default:
+                throw error;
+            }
+        }
     }, []);
 
     const signOut = useCallback(() => {
