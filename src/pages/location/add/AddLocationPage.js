@@ -1,7 +1,7 @@
 import Input from "components/common/Input/Input";
 import LocationSuggestionCard from "components/location/LocationSuggestionCard";
 import Page from "components/util/Page/Page";
-import {LocationContext} from "context/LocationContext";
+import {LocationContext, TooManyLocationsError} from "context/LocationContext";
 import "pages/location/add/AddLocationPage.scss";
 import {useContext, useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
@@ -12,6 +12,7 @@ const AddLocationPage = () => {
     const [input, setInput] = useState("");
     const [isLoading, setIsLoading] = useState(false);
     const [suggestions, setSuggestions] = useState([]);
+    const [error, setError] = useState(undefined);
     const {getSuggestions, addLocation} = useContext(LocationContext);
 
     const onInputChanged = data => {
@@ -25,8 +26,13 @@ const AddLocationPage = () => {
             navigate("/location");
         };
 
-        call()
-            .catch(console.error);
+        call().catch(error => {
+            if (error instanceof TooManyLocationsError) {
+                setError(`Je hebt het maximale aantal plaatsen (${error.max}) bereikt. Verwijder eerst een plaats om een nieuwe locatie toe te kunnen voegen`);
+            } else {
+                setError(`Er is een onbekende fout opgetreden, foutmelding: ${error.message}`);
+            }
+        });
     };
 
     useEffect(() => {
@@ -50,9 +56,15 @@ const AddLocationPage = () => {
                     <p>
                         Er geen geen plaatsen gevonden met de plaatsnaam <span className={"city"}>{input}</span>, probeer het opnieuw met een andere zoekwaarde
                     </p>
-                </div>}
+                </div>
+            }
+            {error &&
+                <div className="error">
+                    {error}
+                </div>
+            }
             <div className="location-suggestions">
-                {suggestions.map(location => {
+                {!error && suggestions.map(location => {
                     const parts = location.weergavenaam.split(",");
                     const province = parts.slice(1)
                         .join(",");

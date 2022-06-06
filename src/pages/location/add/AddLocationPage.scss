@@ -8,7 +8,7 @@
   row-gap: 0.5rem;
 }
 
-.no-suggestions-found {
+.no-suggestions-found, .error {
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: var(--color-red);

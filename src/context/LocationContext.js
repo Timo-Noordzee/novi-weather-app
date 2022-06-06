@@ -1,27 +1,43 @@
 import axios from "axios";
 import {AuthContext} from "context/AuthContext";
-import {doc, GeoPoint, setDoc, onSnapshot, deleteField} from "firebase/firestore";
+import {
+    deleteField,
+    doc,
+    GeoPoint,
+    onSnapshot,
+    setDoc
+} from "firebase/firestore";
 import {getCoordinates} from "helper/address-helper";
 import {
     createContext,
     useCallback,
     useContext,
     useEffect,
-    useMemo, useState
+    useMemo,
+    useState
 } from "react";
 import {firestore} from "services/firebase";
 
-function getCachedLocations() {
-    const saved = window.localStorage.getItem("locations") ?? "[]"
-    return JSON.parse(saved)
+function getCachedLocations () {
+    const saved = window.localStorage.getItem("locations") ?? "[]";
+    return JSON.parse(saved);
+}
+
+export class TooManyLocationsError extends Error {
+    constructor (max) {
+        super(`maximum amount of locations (${max}) reached`);
+        this.max = max;
+    }
 }
 
 export const LocationContext = createContext({});
 
+const MAX_LOCATION_COUNT = 10;
+
 export const LocationContextProvider = props => {
 
     const {user} = useContext(AuthContext);
-    const [locations, setLocations] = useState(getCachedLocations())
+    const [locations, setLocations] = useState(getCachedLocations());
 
     const getSuggestions = useCallback(async (query) => {
         if (!query) {
@@ -36,6 +52,10 @@ export const LocationContextProvider = props => {
     }, []);
 
     const addLocation = useCallback(async (id) => {
+        if (locations.length >= MAX_LOCATION_COUNT) {
+            throw new TooManyLocationsError(MAX_LOCATION_COUNT);
+        }
+
         const response = await axios.get(`https://geodata.nationaalgeoregister.nl/locatieserver/v3/lookup?id=${id}`);
         if (response.status === 200) {
             const data = response.data.response.docs[0];
@@ -53,43 +73,47 @@ export const LocationContextProvider = props => {
                 }
             }, {merge: true});
         }
-    }, [user]);
+    }, [
+        user,
+        locations
+    ]);
 
     const removeLocation = useCallback(async (id) => {
-        const userDoc = doc(firestore, "users", user.uid)
+        const userDoc = doc(firestore, "users", user.uid);
         await setDoc(userDoc, {
             locations: {
                 [id]: deleteField()
             }
-        }, {merge: true})
+        }, {merge: true});
 
-    }, [user])
+    }, [user]);
 
     useEffect(() => {
-        if(user){
-            const userDoc = doc(firestore, "users", user.uid)
+        if (user) {
+            const userDoc = doc(firestore, "users", user.uid);
             const unSub = onSnapshot(userDoc, (doc) => {
                 const data = doc.data();
-                const userLocations = Object.entries(data?.locations ?? {}).map(location => ({id: location[0], ...location[1]}));
-                const sorted = userLocations.sort((a, b) => a.city.localeCompare(b.city))
-                window.localStorage.setItem("locations", JSON.stringify(sorted))
-                setLocations(sorted)
-            })
+                const userLocations = Object.entries(data?.locations ?? {})
+                    .map(location => ({id: location[0], ...location[1]}));
+                const sorted = userLocations.sort((a, b) => a.city.localeCompare(b.city));
+                window.localStorage.setItem("locations", JSON.stringify(sorted));
+                setLocations(sorted);
+            });
 
-            return () => unSub()
+            return () => unSub();
         }
-    }, [user])
+    }, [user]);
 
     const contextValue = useMemo(() => ({
         locations,
         getSuggestions,
         addLocation,
-        removeLocation,
+        removeLocation
     }), [
         locations,
         getSuggestions,
         addLocation,
-        removeLocation,
+        removeLocation
     ]);
 
     return <LocationContext.Provider value={contextValue} {...props} />;
