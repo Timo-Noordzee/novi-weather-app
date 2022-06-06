@@ -45,7 +45,7 @@ const Accordion = ({className, children, openedByDefault}) => {
                 case AccordionSummary.TYPE:
                     return cloneElement(child, {
                         opened,
-                        __ON_CLICK: onToggleClicked
+                        __on_click: onToggleClicked
                     });
                 default:
                     return cloneElement(child, {

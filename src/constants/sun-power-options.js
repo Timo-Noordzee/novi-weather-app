@@ -2,7 +2,7 @@ export const sunPowerOptions = [
     {
         min: 1,
         max: 2,
-        label: "vrijwel geen",
+        label: "Vrijwel geen",
         value: "almost_none"
     },
     {

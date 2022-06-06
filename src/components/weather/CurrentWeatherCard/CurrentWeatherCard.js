@@ -21,7 +21,7 @@ const CurrentWeatherCard = ({weather}) => {
                 <div className="current-weather-summary">
                     <div className="temperature-wrapper">
                         <h2 className={"temperature"}>{displayTemperature(weather.current.temp)}</h2>
-                        <small className={"feels-like-temperature"}>(Voelt als ${displayTemperature(weather.current.feels_like)})</small>
+                        <small className={"feels-like-temperature"}>(Voelt als {displayTemperature(weather.current.feels_like)})</small>
                     </div>
                     <p className="description">{weather.current.weather[0].description}</p>
                 </div>

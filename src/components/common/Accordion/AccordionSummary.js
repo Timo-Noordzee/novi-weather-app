@@ -4,11 +4,11 @@ import {MdExpandMore} from "react-icons/md";
 const AccordionSummary = props => {
 
     return (
-        <div className="accordion-summary" onClick={props.__ON_CLICK}>
+        <div className="accordion-summary" onClick={props.__on_click}>
             <div className={`accordion-summary-content ${props.className ?? ''}`}>
                 {props.children}
             </div>
-            <div className={`accordion-expand-icon-wrapper ${props.opened ? 'expanded' : ''}`} onClick={props.__ON_CLICK}>
+            <div className={`accordion-expand-icon-wrapper ${props.opened ? 'expanded' : ''}`} onClick={props.__on_click}>
                 <MdExpandMore size="2.5rem"/>
             </div>
         </div>
@@ -19,7 +19,7 @@ AccordionSummary.propTypes = {
     children: PropTypes.node,
     className: PropTypes.string,
     __TYPE: PropTypes.string,
-    __ON_CLICK: PropTypes.func
+    __on_click: PropTypes.func
 };
 
 AccordionSummary.TYPE = "AccordionSummary";
