@@ -1,0 +1,15 @@
+.input-wrapper {
+  width: 100%;
+
+  .input {
+    background-color: var(--card-background-color);
+    border: none;
+    border-radius: 0.5rem;
+    box-sizing: border-box;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    padding: 1rem;
+    width: 100%;
+  }
+}

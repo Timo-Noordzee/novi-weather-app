@@ -1,0 +1,15 @@
+.icon-button {
+  background-color: transparent;
+  border: none;
+  display: contents;
+  margin: 0;
+  padding: 0;
+
+  :hover {
+    cursor: pointer;
+  }
+
+  .icon {
+    padding: 0.5rem;
+  }
+}

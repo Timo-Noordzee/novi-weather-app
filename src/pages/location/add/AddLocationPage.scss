@@ -1,0 +1,20 @@
+#search-input {
+  margin-bottom: 1rem;
+}
+
+.location-suggestions {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+}
+
+.no-suggestions-found, .error {
+  padding: 1rem;
+  border-radius: 0.5rem;
+  background-color: var(--color-red);
+  color: #FFFFFF;
+
+  .city {
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,47 @@
+.current-weather-card-body {
+  display: flex;
+  flex-direction: column;
+
+  .current-weather-header {
+    align-items: center;
+    display: flex;
+    column-gap: 1rem;
+    margin: 1rem 0;
+
+    .weather-icon {
+      width: 5rem;
+      height: 5rem;
+    }
+
+    .current-weather-summary {
+      display: flex;
+      flex-direction: column;
+
+      .temperature-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        column-gap: 0.5rem;
+
+        .temperature {
+          margin: 0;
+        }
+      }
+
+      .description {
+        margin: 0;
+      }
+    }
+  }
+
+  .current-weather-details {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    .weather-grid {
+      flex: 1;
+    }
+  }
+}

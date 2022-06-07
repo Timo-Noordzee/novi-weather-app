@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import AuthenticatedRoute
+    from "components/util/AuhenticatedRoute/AuthenticatedRoute";
+import {AuthContext} from "context/AuthContext";
+import AddLocationPage from "pages/location/add/AddLocationPage";
+import LocationDetailsPage from "pages/location/details/LocationDetailsPage";
+import LocationsPage from "pages/location/overview/LocationsPage";
+import LoginPage from "pages/login/LoginPage";
+import RankingPage from "pages/RankingPage/RankingPage";
+import SettingsPage from "pages/SettingsPage/SettingsPage";
+import {useContext} from "react";
+import {Route, Routes} from "react-router-dom";
+import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+function App () {
+    const {preferences} = useContext(AuthContext)
+
+    return (
+        <div className="app" data-theme={preferences.theme}>
+            <Routes>
+                <Route path="/" element={
+                    <AuthenticatedRoute>
+                        <LocationsPage />
+                    </AuthenticatedRoute>
+                } />
+                <Route path={"/login"} element={<LoginPage />} />
+                <Route path={"/location/*"} element={<AuthenticatedRoute>
+                    <Routes>
+                        <Route index element={<LocationsPage />} />
+                        <Route exact path={"add"} element={
+                            <AddLocationPage />} />
+                        <Route path={":id"} element={<LocationDetailsPage />} />
+                    </Routes>
+                </AuthenticatedRoute>} />
+                <Route path={"/locations"} element={<AuthenticatedRoute>
+                    <LocationsPage />
+                </AuthenticatedRoute>} />
+                <Route path={"/settings"} element={<AuthenticatedRoute>
+                    <SettingsPage />
+                </AuthenticatedRoute>} />
+                <Route path={"/ranking"} element={<AuthenticatedRoute>
+                    <RankingPage />
+                </AuthenticatedRoute>} />
+            </Routes>
+        </div>
+    );
 }
 
 export default App;

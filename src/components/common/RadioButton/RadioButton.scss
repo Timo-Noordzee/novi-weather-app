@@ -1,0 +1,47 @@
+.radio-button-input {
+  align-items: center;
+  display: flex;
+
+  input[type="radio"] {
+    appearance: none;
+    background-color: var(--card-background-color);
+    border: none;
+    border-radius: 50%;
+    color: currentColor;
+    display: grid;
+    font: inherit;
+    height: 1.5em;
+    margin: 0;
+    place-content: center;
+    width: 1.5em;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:before {
+      border-radius: 50%;
+      background-color: var(--primary-color);
+      content: "";
+      height: 1em;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      width: 1em;
+    }
+
+    &:checked {
+      &:before {
+        transform: scale(1);
+      }
+    }
+  }
+
+  label {
+    margin-left: 0.5rem;
+    color: var(--text-color);
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}
