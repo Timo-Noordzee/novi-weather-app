@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+# Weerkompas
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Door: Timo Noordzee<br/>
+Projectpagina: https://github.com/Timo-Noordzee/novi-weather-app
 
-## Available Scripts
 
-In the project directory, you can run:
+De Weerkompas applicatie is een weer app met een twist. In deze applicatie heb je zelf invloed op hoe weercijfers
+berekend worden. In de instelling van de app kun je je weervoorkeur instellen. Deze voorkeur wordt gebruikt bij het
+berekenen van weercijfers.
 
-### `npm start`
+![Home page](files/screenshot_1.png)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+![Ranking page](files/screenshot_2.png)
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Installeren
 
-### `npm test`
+Om de weerkompas applicatie te gebruiken hoeft je niets te installeren. De applicatie is beschikbaar
+op [novi-weather.web.app](https://novi-weather.web.app/).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Indien gewenst is het ook mogelijk de applicatie lokaal te draaien door onderstaande stappen te doorlopen.
 
-### `npm run build`
+1. Clone het project ``git clone https://github.com/Timo-Noordzee/novi-weather-app.git``
+2. Open het project in een IDEA naar keuze (zoals Webstorm)
+3. Installeer de npm dependencies met het ``npm install`` commando
+4. Start de applicatie met het ``npm run start`` commando
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Na het doorlopen van deze 4 stappen is de applicatie lokaal beschikbaar op http://localhost:3000/
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Om zelf een productie build van de applicatie te maken kun je het commando ``npm run build`` gebruiken. De build wordt
+gemaakt in de `build` map.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Inloggegevens
 
-### `npm run eject`
+Het is eenvoudig om een account aan te maken voor de Weerkompas. Alles wat je hiervoor nodig hebt is een e-mailadres en
+wachtwoord. Er is ook een demoaccount beschikbaar dat gebruikt kan worden bij het testen van de applicatie. Onderstaande
+credentials kunnen gebruikt worden om in te loggen op dit demoaccount.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+| Emailadres | demo@novi.nl |
+|------------|--------------|
+| Wachtwoord | Frontend2022 |
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Relevante documenten
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+Voor de applicatie zijn 3 relevante documenten beschikbaar die meer inzicht geven in hoe de applicatie tot stand is
+gekomen en de gemaakte keuzes.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Functioneel ontwerp
 
-## Learn More
+Het [functioneel ontwerp](files/Functioneel%20ontwerp.pdf) geeft inzicht in de totstandkoming van de applicatie van
+probleemstelling naar wireframes tot
+een volledig uitwerkt ontwerp in Adobe XD.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Ontwerp in Adobe XD
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Het ontwerp gemaakt in Adobe XD is te vinden
+in [files/Novi Fontend - Weather App.xd](files/Novi%20Frontend%20-%20Weather%20App.xd)
 
-### Code Splitting
+### Verantwoordingsdocument
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Het [verantwoordingsdocument](files/Verantwoordingsdocument.pdf) bevat onderbouwingen van gemaakte technische keuzes.
+Daarnaast bevat dit document een beschrijving van de limitaties van de applicatie en mogelijke doorontwikkelingen.
